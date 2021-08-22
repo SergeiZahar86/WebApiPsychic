@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 
-namespace WebApiPsychic
+namespace Application
 {
     public static class SessionExtensions
     {

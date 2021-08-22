@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiPsychic", "WebApiPsychic\WebApiPsychic.csproj", "{2EE1464E-CAFD-4D15-AC17-D4B174BFF66E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{D78632D1-8339-4C35-A441-76E35EB78959}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2EE1464E-CAFD-4D15-AC17-D4B174BFF66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EE1464E-CAFD-4D15-AC17-D4B174BFF66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EE1464E-CAFD-4D15-AC17-D4B174BFF66E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D78632D1-8339-4C35-A441-76E35EB78959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78632D1-8339-4C35-A441-76E35EB78959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78632D1-8339-4C35-A441-76E35EB78959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78632D1-8339-4C35-A441-76E35EB78959}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

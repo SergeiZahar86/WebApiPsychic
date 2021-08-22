@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using WebApiPsychic.Middleware;
 
 namespace WebApiPsychic
 {
@@ -23,6 +24,7 @@ namespace WebApiPsychic
                 options.IdleTimeout = TimeSpan.FromSeconds(3600);
                 options.Cookie.IsEssential = true;
             });
+            services.AddApplication();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -46,8 +48,10 @@ namespace WebApiPsychic
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiPsychic v1"));
             }
+            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors("AllowAll");
             app.UseAuthorization();
             app.UseSession();   
             app.UseEndpoints(endpoints =>

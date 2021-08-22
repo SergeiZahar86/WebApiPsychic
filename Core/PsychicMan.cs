@@ -15,10 +15,10 @@ namespace WebApiPsychic
         /// <summary>
         /// Список догадок (предположений)
         /// </summary>
-        public List<int> Guesses { get; set; }
+        public List<int?> Guesses { get; set; }
         /// <summary>
         /// Текущая догадка
         /// </summary>
-        public int Сurrent_guess { get; set; }
+        public int? Сurrent_guess { get; set; }
     }
 }
