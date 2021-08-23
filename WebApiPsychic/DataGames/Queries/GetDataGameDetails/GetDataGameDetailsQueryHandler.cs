@@ -39,21 +39,21 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameDetails
                     {
                         new PsychicMan
                         {
-                            Name = "Tom",
+                            Name = "Eric Cartman",
                             Authenticity = 0,
                             Сurrent_guess = new Random().Next(1, 4),
                             Guesses = new List<int?>(),
                         },
                         new PsychicMan
                         {
-                            Name = "Tom",
+                            Name = "Stan Marsh",
                             Authenticity = 0,
                             Guesses = new List<int?>(),
                             Сurrent_guess = new Random().Next(1, 4)
                         },
                         new PsychicMan
                         {
-                            Name = "Tom",
+                            Name = "Kyle Broflovski",
                             Authenticity = 0,
                             Guesses = new List<int?>(),
                             Сurrent_guess = new Random().Next(1, 4)
