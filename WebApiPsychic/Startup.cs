@@ -64,7 +64,7 @@ namespace WebApiPsychic
             app.UseRouting();
             //app.UseCors("AllowAll");
             app.UseCors(builder => builder
-            .WithOrigins("http://localhost:4200")
+            .WithOrigins("https://localhost:4200")
             //.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod()
