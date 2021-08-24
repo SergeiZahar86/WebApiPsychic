@@ -22,7 +22,7 @@ namespace WebApiPsychic
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(3600);
-                options.Cookie.IsEssential = true;
+                //options.Cookie.IsEssential = true;
                 //options.Cookie.HttpOnly = true;
             });
             services.AddApplication();
@@ -31,16 +31,17 @@ namespace WebApiPsychic
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiPsychic", Version = "v1" });
             });
-            /*services.AddCors(option =>
+            services.AddCors(option =>
             {
                 option.AddPolicy("allowAll", policy =>
                 {
                     policy.AllowAnyHeader();
                     policy.AllowAnyMethod();
-                    policy.AllowAnyOrigin();
+                    policy.WithOrigins("http://localhost:4200");
+                    policy.AllowCredentials();
                 });
-            });*/
-            services.AddCors();
+            });
+            //services.AddCors();
             /*services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -61,10 +62,14 @@ namespace WebApiPsychic
             app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
-            //app.UseCors("AllowAll");
-            app.UseCors(builder => builder.AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod());
+            app.UseCors("AllowAll");
+            /*app.UseCors(builder => builder
+            .WithOrigins("http://192.168.1.2:4200")
+            //.AllowAnyOrigin()
+            //.AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .WithExposedHeaders("Access-Control-Allow-Origin"));*/
             app.UseAuthorization();
             app.UseSession();   
             app.UseEndpoints(endpoints =>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WebApiPsychic.DataGames.Queries.GetDataGameDetails;
 using WebApiPsychic.DataGames.Queries.GetDataGameEndRound;
 using Notes.WebApi.Controllers;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApiPsychic.Controllers
 {
@@ -27,6 +28,7 @@ namespace WebApiPsychic.Controllers
         /// </remarks>
         /// <returns>Returns DataGame</returns>
         /// <response code="200">Success</response>
+        [EnableCors("allowAll")]
         [HttpGet]
         [Route("startgame")]
         public async Task<ActionResult<DataGame>> StartGame()
