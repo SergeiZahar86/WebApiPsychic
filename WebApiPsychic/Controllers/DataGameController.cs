@@ -64,6 +64,7 @@ namespace WebApiPsychic.Controllers
                 SecretNumber = secretNumber,
                 Session = session
             };
+            DataGame data = HttpContext.Session.Get<DataGame>("dataGame");
             var dg = await Mediator.Send(gameCommand);
             return Ok(dg);
         }

@@ -23,6 +23,7 @@ namespace WebApiPsychic
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(3600);
                 options.Cookie.IsEssential = true;
+                //options.Cookie.HttpOnly = true;
             });
             services.AddApplication();
             services.AddControllers();
@@ -30,7 +31,7 @@ namespace WebApiPsychic
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiPsychic", Version = "v1" });
             });
-            services.AddCors(option =>
+            /*services.AddCors(option =>
             {
                 option.AddPolicy("allowAll", policy =>
                 {
@@ -38,7 +39,16 @@ namespace WebApiPsychic
                     policy.AllowAnyMethod();
                     policy.AllowAnyOrigin();
                 });
-            });
+            });*/
+            services.AddCors();
+            /*services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+
+                //Here comes the change:
+                options.CheckConsentNeeded = context => false;
+                //options.MinimumSameSitePolicy = SameSiteMode.None;
+            });*/
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -51,7 +61,10 @@ namespace WebApiPsychic
             app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors("AllowAll");
+            //app.UseCors("AllowAll");
+            app.UseCors(builder => builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
             app.UseAuthorization();
             app.UseSession();   
             app.UseEndpoints(endpoints =>

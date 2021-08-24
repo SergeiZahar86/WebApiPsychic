@@ -18,12 +18,15 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameDetails
                 Task<DataGame> TaskDataGame = new Task<DataGame>(() =>
                 {
                     DataGame dataGame = request.Session.Get<DataGame>("dataGame");
-                    foreach (PsychicMan man in dataGame.Psychics)
+                    if (dataGame.Psychics[0].Сurrent_guess == null)
                     {
-                        man.Сurrent_guess = new Random().Next(1, 4);
-                        man.Guesses.Add(man.Сurrent_guess);
+                        foreach (PsychicMan man in dataGame.Psychics)
+                        {
+                            man.Сurrent_guess = new Random().Next(1, 4);
+                            man.Guesses.Add(man.Сurrent_guess);
+                        }
+                        request.Session.Set("dataGame", dataGame);
                     }
-                    request.Session.Set("dataGame", dataGame);
                     return dataGame;
                 });
                 TaskDataGame.Start();

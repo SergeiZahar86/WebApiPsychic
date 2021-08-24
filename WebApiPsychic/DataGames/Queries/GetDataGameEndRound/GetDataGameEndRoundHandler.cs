@@ -17,17 +17,20 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameEndRound
                     throw new BadRequestException(request.SecretNumber);
                 }
                 DataGame dataGame = request.Session.Get<DataGame>("dataGame");
-
-                foreach (PsychicMan man in dataGame.Psychics)
+                if (dataGame.Psychics[0].Сurrent_guess != null)
                 {
-                    if (man.Сurrent_guess == request.SecretNumber)
-                        man.Authenticity++;
-                    else man.Authenticity--;
+                    foreach (PsychicMan man in dataGame.Psychics)
+                    {
+                        if (man.Сurrent_guess == request.SecretNumber)
+                            man.Authenticity++;
+                        else man.Authenticity--;
 
-                    man.Сurrent_guess = null;
+                        man.Сurrent_guess = null;
+                    }
+                    dataGame.Player_Numbers.Add(request.SecretNumber);
+                    request.Session.Set("dataGame", dataGame);
                 }
-                dataGame.Player_Numbers.Add(request.SecretNumber);
-                request.Session.Set("dataGame", dataGame);
+
                 return dataGame;
             });
             TaskDataGame.Start();
