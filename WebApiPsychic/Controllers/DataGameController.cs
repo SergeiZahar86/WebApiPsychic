@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using WebApiPsychic.DataGames.Queries.GetDataGameDetails;
 using WebApiPsychic.DataGames.Queries.GetDataGameEndRound;
 using Notes.WebApi.Controllers;
-using Microsoft.AspNetCore.Cors;
 
 namespace WebApiPsychic.Controllers
 {
@@ -28,7 +27,7 @@ namespace WebApiPsychic.Controllers
         /// </remarks>
         /// <returns>Returns DataGame</returns>
         /// <response code="200">Success</response>
-        [EnableCors("allowAll")]
+        //[EnableCors("allowAll")]
         [HttpGet]
         [Route("startgame")]
         public async Task<ActionResult<DataGame>> StartGame()
@@ -54,11 +53,11 @@ namespace WebApiPsychic.Controllers
         /// <response code="200">Success</response>
         /// <response code="400">Переданное значение не в рамках
         /// допустимого диапазона</response>
-        [HttpGet]
+        [HttpPost]
         [Route("endround")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<DataGame>> EndRound(int secretNumber)
+        public async Task<ActionResult<DataGame>> EndRound([FromBody]int secretNumber)
         {
             ISession session = HttpContext.Session;
             GetDataGameEndRoundQuery gameCommand = new()
@@ -66,7 +65,6 @@ namespace WebApiPsychic.Controllers
                 SecretNumber = secretNumber,
                 Session = session
             };
-            DataGame data = HttpContext.Session.Get<DataGame>("dataGame");
             var dg = await Mediator.Send(gameCommand);
             return Ok(dg);
         }

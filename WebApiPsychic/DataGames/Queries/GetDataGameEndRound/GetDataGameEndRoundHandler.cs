@@ -30,7 +30,6 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameEndRound
                     dataGame.Player_Numbers.Add(request.SecretNumber);
                     request.Session.Set("dataGame", dataGame);
                 }
-
                 return dataGame;
             });
             TaskDataGame.Start();
