@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using WebApiPsychic.DataGames.Queries.GetDataGameDetails;
 using WebApiPsychic.DataGames.Queries.GetDataGameEndRound;
 using Notes.WebApi.Controllers;
+using System.Net.Mime;
 
 namespace WebApiPsychic.Controllers
 {
+    [Consumes(MediaTypeNames.Application.Json)]
+    [Produces(MediaTypeNames.Application.Json)]
     [ApiController]
     [Route("api/datagame")]
     public class DataGameController : BaseController
@@ -18,6 +21,7 @@ namespace WebApiPsychic.Controllers
             _logger = logger;
         }
 
+        //[EnableCors("allowAll")]
         /// <summary>
         /// Получение предполагаемых чисел в начале раунда от экстрасенсов
         /// </summary>
@@ -26,10 +30,12 @@ namespace WebApiPsychic.Controllers
         /// GET / StartGame
         /// </remarks>
         /// <returns>Returns DataGame</returns>
-        /// <response code="200">Success</response>
-        //[EnableCors("allowAll")]
+        /// <response code="200">Удачное выполнение запроса</response>
+        /// <response code="400">Ошибка во время выполнения</response>
         [HttpGet]
         [Route("startgame")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<DataGame>> StartGame()
         {
             ISession session = HttpContext.Session;
@@ -50,7 +56,7 @@ namespace WebApiPsychic.Controllers
         /// GET / EndRound
         /// </remarks>
         /// <returns>Returns DataGame</returns>
-        /// <response code="200">Success</response>
+        /// <response code="200">Удачное выполнение запроса</response>
         /// <response code="400">Переданное значение не в рамках
         /// допустимого диапазона</response>
         [HttpPost]

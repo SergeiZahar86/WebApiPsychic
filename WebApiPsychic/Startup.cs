@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
+using System.Reflection;
 using WebApiPsychic.Middleware;
 
 namespace WebApiPsychic
@@ -18,6 +20,7 @@ namespace WebApiPsychic
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            // для работы с сессиями
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
@@ -25,11 +28,36 @@ namespace WebApiPsychic
                 options.Cookie.IsEssential = true;
                 options.Cookie.HttpOnly = false;
             });
+
+
             services.AddApplication();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiPsychic", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "WebApiPsychic",
+                    Description = "A sample ASP.NET Core Web API",
+                    Version = "v1",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Sergei Zakharov",
+                        Email = "sergeizahargood@gmail.com",
+                        Url = new Uri("https://www.instagram.com/sergeizahargood_gmail_com/")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MY License",
+                        Url = new Uri("https://www.instagram.com/")
+                    },
+
+                });
+
+                // генерация документации
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
             });
             /*services.AddCors(option =>
             {

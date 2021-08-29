@@ -10,7 +10,7 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameDetails
     public class GetDataGameDetailsQueryHandler
         : IRequestHandler<GetDataGameDetailsQuery, DataGame>
     {
-        public Task<DataGame> Handle(GetDataGameDetailsQuery request,
+        public async Task<DataGame> Handle(GetDataGameDetailsQuery request,
                                      CancellationToken cancellationToken)
         {
             if (request.Session.Keys.Contains("dataGame"))
@@ -30,7 +30,7 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameDetails
                     return dataGame;
                 });
                 TaskDataGame.Start();
-                return TaskDataGame;
+                return await TaskDataGame;
             }
             else
             {
@@ -72,7 +72,7 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameDetails
                     return dataGame;
                 });
                 TaskDataGame.Start();
-                return TaskDataGame;
+                return await TaskDataGame;
             }
         }
     }

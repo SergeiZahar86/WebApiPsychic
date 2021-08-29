@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApiPsychic</name>
+    </assembly>
+    <members>
+        <member name="M:WebApiPsychic.Controllers.DataGameController.StartGame">
+            <summary>
+            Получение предполагаемых чисел в начале раунда от экстрасенсов
+            </summary>
+            <remarks>
+            Sample request:
+            GET / StartGame
+            </remarks>
+            <returns>Returns DataGame</returns>
+            <response code="200">Удачное выполнение запроса</response>
+            <response code="400">Ошибка во время выполнения</response>
+        </member>
+        <member name="M:WebApiPsychic.Controllers.DataGameController.EndRound(System.Int32)">
+            <summary>
+            Получение уровня достоверности экстрасенсов 
+            в конце раунда 
+            </summary>
+            <remarks>
+            Sample request:
+            GET / EndRound
+            </remarks>
+            <returns>Returns DataGame</returns>
+            <response code="200">Удачное выполнение запроса</response>
+            <response code="400">Переданное значение не в рамках
+            допустимого диапазона</response>
+        </member>
+        <member name="M:WebApiPsychic.DependencyInjection.AddApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Регистрация медиатора
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

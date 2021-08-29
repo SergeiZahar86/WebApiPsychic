@@ -7,7 +7,7 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameEndRound
 {
     public class GetDataGameEndRoundHandler : IRequestHandler<GetDataGameEndRoundQuery, DataGame>
     {
-        public Task<DataGame> Handle(GetDataGameEndRoundQuery request,
+        public async Task<DataGame> Handle(GetDataGameEndRoundQuery request,
                                      CancellationToken cancellationToken)
         {
             Task<DataGame> TaskDataGame = new Task<DataGame>(() =>
@@ -33,7 +33,7 @@ namespace WebApiPsychic.DataGames.Queries.GetDataGameEndRound
                 return dataGame;
             });
             TaskDataGame.Start();
-            return TaskDataGame;
+            return await TaskDataGame;
         }
     }
 }
